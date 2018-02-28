@@ -1,0 +1,5 @@
+*.pyc
+*.swp
+private/
+output_images/
+saved_model*/
