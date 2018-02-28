@@ -3,4 +3,4 @@
 private/
 output_images/
 saved_model*/
-other/
+.vscode/
