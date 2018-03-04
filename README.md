@@ -41,10 +41,10 @@ Now you should be logged into the machine and see a command-line prompt $.
  - ```mkdir cork_ai```   *(make a new folder to work in)*
  - ```cd cork_ai```         *(switch to the newly created folder)*
  - ```git clone https://github.com/CorkAI/Meetup3.git```  *(this will make a Meetup3 folder with all the code/data we need)*
- - ```cd Meetup3```     *(switch to the Meetup2 folder)*
+ - ```cd Meetup3```     *(switch to the Meetup3 folder)*
 
 **Launch conda environment**
- Our AWS machine has multiple deep-learning environments installed (conda environments).  We need to launch one so that the libraries we need (e.g. tensorflow) are ready for use:
+ Our AWS machine has multiple deep-learning environments installed (conda environments).  We need to launch one with a suitable Python version and TensorFlow already installed:
  - Type ```source activate tensorflow_p36```
 
  Note: In previous meetups "tensorflow_p27" was used to activate Python version 2.7. Here, we're using
@@ -53,10 +53,11 @@ Now you should be logged into the machine and see a command-line prompt $.
 **Install NLTK**
 The "doccluster" example requires the NLTK (Natural Language Tool Kit) module to be installed. To do this:
 - Type ```pip install nltk```
+
 Now the "Punkt" English parser will be installed.
 - Type ```python```   *(Runs the Python 3.6.4 interpreter)*
-- Type ```import nltk```   *(imports the NLTK module into Python)*
-- Type ```nltk.download('punkt')```   *(Downloads and install the Punkt parser)*
+- Type ```import nltk```   *(Imports the NLTK module into Python)*
+- Type ```nltk.download('punkt')```   *(Downloads and installs the Punkt parser)*
 - Type ```exit()```  *(Exits the Python interpreter)*
 
 **Install BeautifulSoup**
@@ -79,7 +80,7 @@ The output file 'docclust.png' is written in folder 'output_images'.
  	- (linux, mac, cygwin): open a new shell on your local machine and create a fresh empty directory. Then copy the output images to your local system:
 		- ```mkdir output_images```
 		- ```cd output_images```
-		- ```scp -i /path/my-key-pair.pem ubuntu@[copied-DNS]:/home/ubuntu/cork_ai/Meetup2/output_images/* .```
+		- ```scp -i /path/my-key-pair.pem ubuntu@[copied-DNS]:/home/ubuntu/cork_ai/Meetup3/output_images/* .```
 		- View the image using Finder / Explorer or your preferred image viewer.
 	- (putty on Windows): Open a command line prompt (cmd)
 		- ```pscp -i C:\path\my-key-pair.ppk ubuntu@[copied-DNS]:/home/ubuntu/cork_ai/Meetup3/output_images/* c:\[my_local_directory]```
