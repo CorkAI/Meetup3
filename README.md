@@ -35,22 +35,37 @@ NOTE: This AMI image is frequently updated, and so you may see a later version t
 
 Now you should be logged into the machine and see a command-line prompt $.
 
-NOTE: From this point on, the instructions are specific for Meetup3!
-
 #### 2: Clone the GitHub repository for Meetup3
 **Folder setup**
  Type the following commands to get setup for running the code:
  - ```mkdir cork_ai```   *(make a new folder to work in)*
  - ```cd cork_ai```         *(switch to the newly created folder)*
- - ```git clone https://github.com/CorkAI/Meetup3.git```  *(this will make a Meetup2 folder with all the code/data we need)*
+ - ```git clone https://github.com/CorkAI/Meetup3.git```  *(this will make a Meetup3 folder with all the code/data we need)*
  - ```cd Meetup3```     *(switch to the Meetup2 folder)*
 
 **Launch conda environment**
  Our AWS machine has multiple deep-learning environments installed (conda environments).  We need to launch one so that the libraries we need (e.g. tensorflow) are ready for use:
- - Type ```source activate tensorflow_p27```
+ - Type ```source activate tensorflow_p36```
 
- **Install SkLearn**
- The "word2vec" example requires the SkLearn module be installed. To do this:
+ Note: In previous meetups "tensorflow_p27" was used to activate Python version 2.7. Here, we're using
+ Python version 3.6.
+
+**Install NLTK**
+The "doccluster" example requires the NLTK (Natural Language Tool Kit) module to be installed. To do this:
+- Type ```pip install nltk```
+Now the "Punkt" English parser will be installed.
+- Type ```python```   *(Runs the Python 3.6.4 interpreter)*
+- Type ```import nltk```   *(imports the NLTK module into Python)*
+- Type ```nltk.download('punkt')```   *(Downloads and install the Punkt parser)*
+- Type ```exit()```  *(Exits the Python interpreter)*
+
+**Install BeautifulSoup**
+In addition, "BeautifulSoup" (bs4) is required to extract text from the HTML documents together with the 'lxml' parser. To do this:
+- Type ```pip install bs4```
+- Type ```pip install lxml```
+
+**Install SkLearn**
+ The "doccluster" and "word2vec" examples require the SkLearn module be installed. To do this:
  - Type ```pip install sklearn```
 
 #### 3: Execute doccluster.py
@@ -59,6 +74,19 @@ and create the "docclust.png" image with the dendrogram showing the similarity
 between docments.
 - Type ```python doccluster.py```
 
+The output file 'docclust.png' is written in folder 'output_images'.
+ - Use scp to copy the output images to your local machine for inspection:
+ 	- (linux, mac, cygwin): open a new shell on your local machine and create a fresh empty directory. Then copy the output images to your local system:
+		- ```mkdir output_images```
+		- ```cd output_images```
+		- ```scp -i /path/my-key-pair.pem ubuntu@[copied-DNS]:/home/ubuntu/cork_ai/Meetup2/output_images/* .```
+		- View the image using Finder / Explorer or your preferred image viewer.
+	- (putty on Windows): Open a command line prompt (cmd)
+		- ```pscp -i C:\path\my-key-pair.ppk ubuntu@[copied-DNS]:/home/ubuntu/cork_ai/Meetup3/output_images/* c:\[my_local_directory]```
+		- View the image using your preferred image viewer
+
 #### 4: Execute word2vec.py
 You can now execute word2vec.py to calculate the word embeddings.
 - Type ```python word2vec.py```
+
+As well as reporting semantically similar words, the program creates a plot 'tsne.png' in the "output_images" folder. This visually shows semantic similarities between terms. Use the instuctions from above to download and view the image.
