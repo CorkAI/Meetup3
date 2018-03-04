@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en" prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#" typeof="bibo:Document w3p:WD">
+ <head>
+  <meta content="en" lang="" property="dc:language">
+   <meta charset="utf-8">
+    <title>
+     High Resolution Time Level 2
+    </title>
+    <style>
+     /*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+
+/* --- INLINES --- */
+em.rfc2119 {
+    text-transform:     lowercase;
+    font-variant:       small-caps;
+    font-style:         normal;
+    color:              #900;
+}
+
+h1 acronym, h2 acronym, h3 acronym, h4 acronym, h5 acronym, h6 acronym, a acronym,
+h1 abbr, h2 abbr, h3 abbr, h4 abbr, h5 abbr, h6 abbr, a abbr {
+    border: none;
+}
+
+dfn {
+    font-weight:    bold;
+}
+
+a.internalDFN {
+    color:  inherit;
+    border-bottom:  1px solid #99c;
+    text-decoration:    none;
+}
+
+a.externalDFN {
+    color:  inherit;
+    border-bottom:  1px dotted #ccc;
+    text-decoration:    none;
+}
+
+a.bibref {
+    text-decoration:    none;
+}
+
+cite .bibref {
+    font-style: normal;
+}
+
+code {
+    color:  #C83500;
+}
+
+/* --- TOC --- */
+.toc a, .tof a {
+    text-decoration:    none;
+}
+
+a .secno, a .figno {
+    color:  #000;
+}
+
+ul.tof, ol.tof {
+    list-style: none outside none;
+}
+
+.caption {
+    margin-top: 0.5em;
+    font-style:   italic;
+}
+
+/* --- TABLE --- */
+table.simple {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    border-bottom:  3px solid #005a9c;
+}
+
+.simple th {
+    background: #005a9c;
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+}
+
+.simple th[scope="row"] {
+    background: inherit;
+    color:  inherit;
+    border-top: 1px solid #ddd;
+}
+
+.simple td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.simple tr:nth-child(even) {
+    background: #f0f6ff;
+}
+
+/* --- DL --- */
+.section dd > p:first-child {
+    margin-top: 0;
+}
+
+.section dd > p:last-child {
+    margin-bottom: 0;
+}
+
+.section dd {
+    margin-bottom:  1em;
+}
+
+.section dl.attrs dd, .section dl.eldef dd {
+    margin-bottom:  0;
+}
+
+@media print {
+    .removeOnSave {
+        display: none;
+    }
+}
+    </style>
+    <style>
+     /* --- EXAMPLES --- */
+div.example-title {
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.example-title span {
+    text-transform: uppercase;
+}
+aside.example, div.example, div.illegal-example {
+    padding: 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+div.illegal-example { color: red }
+div.illegal-example p { color: black }
+aside.example, div.example {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+    border-color: #e0cb52;
+    background: #fcfaee;
+}
+
+aside.example div.example {
+    border-left-width: .1em;
+    border-color: #999;
+    background: #fff;
+}
+aside.example div.example div.example-title {
+    color: #999;
+}
+    </style>
+    <style>
+     /* --- ISSUES/NOTES --- */
+div.issue-title, div.note-title , div.ednote-title, div.warning-title {
+    padding-right:  1em;
+    min-width: 7.5em;
+    color: #b9ab2d;
+}
+div.issue-title { color: #e05252; }
+div.note-title, div.ednote-title { color: #2b2; }
+div.warning-title { color: #f22; }
+div.issue-title span, div.note-title span, div.ednote-title span, div.warning-title span {
+    text-transform: uppercase;
+}
+div.note, div.issue, div.ednote, div.warning {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.note > p:first-child, .ednote > p:first-child, .issue > p:first-child, .warning > p:first-child { margin-top: 0 }
+.issue, .note, .ednote, .warning {
+    padding: .5em;
+    border-left-width: .5em;
+    border-left-style: solid;
+}
+div.issue, div.note , div.ednote,  div.warning {
+    padding: 1em 1.2em 0.5em;
+    margin: 1em 0;
+    position: relative;
+    clear: both;
+}
+span.note, span.ednote, span.issue, span.warning { padding: .1em .5em .15em; }
+
+.issue {
+    border-color: #e05252;
+    background: #fbe9e9;
+}
+.note, .ednote {
+    border-color: #52e052;
+    background: #e9fbe9;
+}
+
+.warning {
+    border-color: #f11;
+    border-right-width: .2em;
+    border-top-width: .2em;
+    border-bottom-width: .2em;
+    border-style: solid;
+    background: #fbe9e9;
+}
+
+.warning-title:before{
+    content: "⚠"; /*U+26A0 WARNING SIGN*/
+    font-size: 3em;
+    float: left;
+    height: 100%;
+    padding-right: .3em;
+    vertical-align: top;
+    margin-top: -0.5em;
+}
+
+li.task-list-item {
+    list-style: none;
+}
+
+input.task-list-item-checkbox {
+    margin: 0 0.35em 0.25em -1.6em;
+    vertical-align: middle;
+}
+    </style>
+    <style>
+     /* HIGHLIGHTS */
+code.prettyprint {
+    color:  inherit;
+}
+
+/* this from google-code-prettify */
+.pln{color:#000}@media screen{.str{color:#080}.kwd{color:#008}.com{color:#800}.typ{color:#606}.lit{color:#066}.pun,.opn,.clo{color:#660}.tag{color:#008}.atn{color:#606}.atv{color:#080}.dec,.var{color:#606}.fun{color:red}}@media print,projection{.str{color:#060}.kwd{color:#006;font-weight:bold}.com{color:#600;font-style:italic}.typ{color:#404;font-weight:bold}.lit{color:#044}.pun,.opn,.clo{color:#440}.tag{color:#006;font-weight:bold}.atn{color:#404}.atv{color:#060}}ol.linenums{margin-top:0;margin-bottom:0}li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8{list-style-type:none}li.L1,li.L3,li.L5,li.L7,li.L9{background:#eee}
+    </style>
+    <style>
+     /* --- WEB IDL --- */
+pre.idl {
+    border-top: 1px solid #90b8de;
+    border-bottom: 1px solid #90b8de;
+    padding:    1em;
+    line-height:    120%;
+}
+
+pre.idl::before {
+    content:    "WebIDL";
+    display:    block;
+    width:      150px;
+    background: #90b8de;
+    color:  #fff;
+    font-family:    sans-serif;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+.idlType {
+    color:  #ff4500;
+    font-weight:    bold;
+    text-decoration:    none;
+}
+
+/*.idlModule*/
+/*.idlModuleID*/
+/*.idlInterface*/
+.idlInterfaceID, .idlDictionaryID, .idlCallbackID, .idlEnumID {
+    font-weight:    bold;
+    color:  #005a9c;
+}
+a.idlEnumItem {
+    color:  #000;
+    border-bottom:  1px dotted #ccc;
+    text-decoration: none;
+}
+
+.idlSuperclass {
+    font-style: italic;
+    color:  #005a9c;
+}
+
+/*.idlAttribute*/
+.idlAttrType, .idlFieldType, .idlMemberType {
+    color:  #005a9c;
+}
+.idlAttrName, .idlFieldName, .idlMemberName {
+    color:  #ff4500;
+}
+.idlAttrName a, .idlFieldName a, .idlMemberName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlMethod*/
+.idlMethType, .idlCallbackType {
+    color:  #005a9c;
+}
+.idlMethName {
+    color:  #ff4500;
+}
+.idlMethName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlCtor*/
+.idlCtorName {
+    color:  #ff4500;
+}
+.idlCtorName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlParam*/
+.idlParamType {
+    color:  #005a9c;
+}
+.idlParamName, .idlDefaultValue {
+    font-style: italic;
+}
+
+.extAttr {
+    color:  #666;
+}
+
+/*.idlSectionComment*/
+.idlSectionComment {
+    color: gray;
+}
+
+/*.idlIterable*/
+.idlIterableKeyType, .idlIterableValueType {
+    color:  #005a9c;
+}
+
+/*.idlMaplike*/
+.idlMaplikeKeyType, .idlMaplikeValueType {
+    color:  #005a9c;
+}
+
+/*.idlConst*/
+.idlConstType {
+    color:  #005a9c;
+}
+.idlConstName {
+    color:  #ff4500;
+}
+.idlConstName a {
+    color:  #ff4500;
+    border-bottom:  1px dotted #ff4500;
+    text-decoration: none;
+}
+
+/*.idlException*/
+.idlExceptionID {
+    font-weight:    bold;
+    color:  #c00;
+}
+
+.idlTypedefID, .idlTypedefType {
+    color:  #005a9c;
+}
+
+.idlRaises, .idlRaises a.idlType, .idlRaises a.idlType code, .excName a, .excName a code {
+    color:  #c00;
+    font-weight:    normal;
+}
+
+.excName a {
+    font-family:    monospace;
+}
+
+.idlRaises a.idlType, .excName a.idlType {
+    border-bottom:  1px dotted #c00;
+}
+
+.excGetSetTrue, .excGetSetFalse, .prmNullTrue, .prmNullFalse, .prmOptTrue, .prmOptFalse {
+    width:  45px;
+    text-align: center;
+}
+.excGetSetTrue, .prmNullTrue, .prmOptTrue { color:  #0c0; }
+.excGetSetFalse, .prmNullFalse, .prmOptFalse { color:  #c00; }
+
+.idlImplements a {
+    font-weight:    bold;
+}
+
+dl.attributes, dl.methods, dl.constants, dl.constructors, dl.fields, dl.dictionary-members {
+    margin-left:    2em;
+}
+
+.attributes dt, .methods dt, .constants dt, .constructors dt, .fields dt, .dictionary-members dt {
+    font-weight:    normal;
+}
+
+.attributes dt code, .methods dt code, .constants dt code, .constructors dt code, .fields dt code, .dictionary-members dt code {
+    font-weight:    bold;
+    color:  #000;
+    font-family:    monospace;
+}
+
+.attributes dt code, .fields dt code, .dictionary-members dt code {
+    background:  #ffffd2;
+}
+
+.attributes dt .idlAttrType code, .fields dt .idlFieldType code, .dictionary-members dt .idlMemberType code {
+    color:  #005a9c;
+    background:  transparent;
+    font-family:    inherit;
+    font-weight:    normal;
+    font-style: italic;
+}
+
+.methods dt code {
+    background:  #d9e6f8;
+}
+
+.constants dt code {
+    background:  #ddffd2;
+}
+
+.constructors dt code {
+    background:  #cfc;
+}
+
+.attributes dd, .methods dd, .constants dd, .constructors dd, .fields dd, .dictionary-members dd {
+    margin-bottom:  1em;
+}
+
+table.parameters, table.exceptions {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    margin: 0.5em 0;
+    width:  100%;
+}
+table.parameters { border-bottom:  1px solid #90b8de; }
+table.exceptions { border-bottom:  1px solid #deb890; }
+
+.parameters th, .exceptions th {
+    color:  #fff;
+    padding:    3px 5px;
+    text-align: left;
+    font-weight:    normal;
+    text-shadow:    #666 1px 1px 0;
+}
+.parameters th { background: #90b8de; }
+.exceptions th { background: #deb890; }
+
+.parameters td, .exceptions td {
+    padding:    3px 10px;
+    border-top: 1px solid #ddd;
+    vertical-align: top;
+}
+
+.parameters tr:first-child td, .exceptions tr:first-child td {
+    border-top: none;
+}
+
+.parameters td.prmName, .exceptions td.excName, .exceptions td.excCodeName {
+    width:  100px;
+}
+
+.parameters td.prmType {
+    width:  120px;
+}
+
+table.exceptions table {
+    border-spacing: 0;
+    border-collapse:    collapse;
+    width:  100%;
+}
+    </style>
+    <link href="https://www.w3.org/StyleSheets/TR/W3C-WD" rel="stylesheet">
+     <!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]-->
+    </link>
+   </meta>
+  </meta>
+ </head>
+ <body class="h-entry" id="respecDocument" role="document">
+  <div class="head" id="respecHeader" role="contentinfo">
+   <p>
+    <a href="http://www.w3.org/">
+     <img alt="W3C" height="48" src="https://www.w3.org/Icons/w3c_home" width="72"/>
+    </a>
+   </p>
+   <h1 class="title p-name" id="title" property="dcterms:title">
+    High Resolution Time Level 2
+   </h1>
+   <h2 id="w3c-working-draft-14-july-2015">
+    <abbr title="World Wide Web Consortium">
+     W3C
+    </abbr>
+    Working Draft
+    <time class="dt-published" datetime="2015-07-14" property="dcterms:issued">
+     14 July 2015
+    </time>
+   </h2>
+   <dl>
+    <dt>
+     This version:
+    </dt>
+    <dd>
+     <a class="u-url" href="http://www.w3.org/TR/2015/WD-hr-time-2-20150714/">
+      http://www.w3.org/TR/2015/WD-hr-time-2-20150714/
+     </a>
+    </dd>
+    <dt>
+     Latest published version:
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/TR/hr-time-2/">
+      http://www.w3.org/TR/hr-time-2/
+     </a>
+    </dd>
+    <dt>
+     Latest editor's draft:
+    </dt>
+    <dd>
+     <a href="https://w3c.github.io/hr-time/">
+      https://w3c.github.io/hr-time/
+     </a>
+    </dd>
+    <dt>
+     Previous version:
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/TR/2015/WD-hr-time-2-20150617/" rel="dcterms:replaces">
+      http://www.w3.org/TR/2015/WD-hr-time-2-20150617/
+     </a>
+    </dd>
+    <dt>
+     Editors:
+    </dt>
+    <dd class="p-author h-card vcard" data-editor-id="56102" property="bibo:editor" resource="_:editor0">
+     <span property="rdf:first" typeof="foaf:Person">
+      <span class="p-name fn" property="foaf:name">
+       Ilya Grigorik
+      </span>
+      , Google Inc.,
+      <span class="ed_mailto">
+       <a class="u-email email" href="mailto:igrgiroik@google.com" property="foaf:mbox">
+        igrgiroik@google.com
+       </a>
+      </span>
+      (for version 2)
+     </span>
+     <span property="rdf:rest" resource="_:editor1">
+     </span>
+    </dd>
+    <dd class="p-author h-card vcard" data-editor-id="45726" resource="_:editor1">
+     <span property="rdf:first" typeof="foaf:Person">
+      <span class="p-name fn" property="foaf:name">
+       James Simonsen
+      </span>
+      , Google Inc.,
+      <span class="ed_mailto">
+       <a class="u-email email" href="mailto:simonjam@google.com" property="foaf:mbox">
+        simonjam@google.com
+       </a>
+      </span>
+      (for version 1)
+     </span>
+     <span property="rdf:rest" resource="_:editor2">
+     </span>
+    </dd>
+    <dd class="p-author h-card vcard" data-editor-id="44357" resource="_:editor2">
+     <span property="rdf:first" typeof="foaf:Person">
+      <span class="p-name fn" property="foaf:name">
+       Jatinder Mann
+      </span>
+      , Microsoft Corp.,
+      <span class="ed_mailto">
+       <a class="u-email email" href="mailto:jmann@microsoft.com" property="foaf:mbox">
+        jmann@microsoft.com
+       </a>
+      </span>
+      (Until February 2014)
+     </span>
+     <span property="rdf:rest" resource="rdf:nil">
+     </span>
+    </dd>
+    <dt>
+     Repository:
+    </dt>
+    <dd>
+     <a href="https://github.com/w3c/hr-time/">
+      We are on Github.
+     </a>
+    </dd>
+    <dd>
+     <a href="https://github.com/w3c/hr-time/issues">
+      File a bug.
+     </a>
+    </dd>
+    <dd>
+     <a href="https://github.com/w3c/hr-time/commits/gh-pages/index.html">
+      Commit history.
+     </a>
+    </dd>
+    <dd>
+     <a href="https://github.com/w3c/web-platform-tests/tree/master/hr-time">
+      Tests.
+     </a>
+    </dd>
+   </dl>
+   <p class="copyright">
+    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">
+     Copyright
+    </a>
+    ©
+        2015
+    <a href="http://www.w3.org/">
+     <abbr title="World Wide Web Consortium">
+      W3C
+     </abbr>
+    </a>
+    <sup>
+     ®
+    </sup>
+    (
+    <a href="http://www.csail.mit.edu/">
+     <abbr title="Massachusetts Institute of Technology">
+      MIT
+     </abbr>
+    </a>
+    ,
+    <a href="http://www.ercim.eu/">
+     <abbr title="European Research Consortium for Informatics and Mathematics">
+      ERCIM
+     </abbr>
+    </a>
+    ,
+    <a href="http://www.keio.ac.jp/">
+     Keio
+    </a>
+    ,
+    <a href="http://ev.buaa.edu.cn/">
+     Beihang
+    </a>
+    ).
+    <abbr title="World Wide Web Consortium">
+     W3C
+    </abbr>
+    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">
+     liability
+    </a>
+    ,
+    <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">
+     trademark
+    </a>
+    and
+    <a href="http://www.w3.org/Consortium/Legal/copyright-documents">
+     document use
+    </a>
+    rules apply.
+   </p>
+   <hr>
+   </hr>
+  </div>
+  <section class="introductory" id="abstract" property="dc:abstract">
+   <h2 id="h-abstract" resource="#h-abstract">
+    <span property="xhv:role" resource="xhv:heading">
+     Abstract
+    </span>
+   </h2>
+   <p>
+    This specification defines an API that provides the current time
+	in sub-millisecond resolution and such that it is not subject to system clock skew or adjustments.
+   </p>
+  </section>
+  <section class="introductory" id="sotd">
+   <h2 id="h-sotd" resource="#h-sotd">
+    <span property="xhv:role" resource="xhv:heading">
+     Status of This Document
+    </span>
+   </h2>
+   <p>
+    <em>
+     This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current
+     <abbr title="World Wide Web Consortium">
+      W3C
+     </abbr>
+     publications and the latest revision of this technical report can be found in the
+     <a href="http://www.w3.org/TR/">
+      <abbr title="World Wide Web Consortium">
+       W3C
+      </abbr>
+      technical reports index
+     </a>
+     at http://www.w3.org/TR/.
+    </em>
+   </p>
+   <p>
+    This is a
+    <strong>
+     work in progress
+    </strong>
+    and may change without any
+notices.
+   </p>
+   <p>
+    High Resolution Time Level 2 builds on the first version of High Resolution Time [
+    <cite>
+     <a class="bibref" href="#bib-HR-TIME">
+      HR-TIME
+     </a>
+    </cite>
+    ] and includes:
+   </p>
+   <ul>
+    <li>
+     provides the base definition for the
+     <a class="idlType" href="#idl-def-Performance">
+      <code>
+       Performance
+      </code>
+     </a>
+     interface, including support for the
+     <a class="internalDFN" href="#dom-performance-now">
+      <code>
+       now
+      </code>
+     </a>
+     method in Web Workers [
+     <cite>
+      <a class="bibref" href="#bib-WORKERS">
+       WORKERS
+      </a>
+     </cite>
+     ];
+    </li>
+    <li>
+     introduces
+     <a class="internalDFN" href="#dom-performance-translateTime">
+      <code>
+       translateTime
+      </code>
+     </a>
+     to translate timestamps between different time origins and deprecates
+     <code>
+      workerStart
+     </code>
+     attribute;
+    </li>
+   </ul>
+   <p>
+    This document was published by the
+    <a href="http://www.w3.org/2010/webperf/">
+     Web Performance Working Group
+    </a>
+    as a Working Draft.
+
+            This document is intended to become a
+    <abbr title="World Wide Web Consortium">
+     W3C
+    </abbr>
+    Recommendation.
+
+
+            If you wish to make comments regarding this document, please send them to
+    <a href="mailto:public-web-perf@w3.org?subject=%5Bhr-time%5D">
+     public-web-perf@w3.org
+    </a>
+    (
+    <a href="mailto:public-web-perf-request@w3.org?subject=subscribe">
+     subscribe
+    </a>
+    ,
+    <a href="http://lists.w3.org/Archives/Public/public-web-perf/">
+     archives
+    </a>
+    )
+              with
+    <code>
+     [hr-time]
+    </code>
+    at the start of your email's subject.
+
+
+
+
+
+
+            All comments are welcome.
+   </p>
+   <p>
+    Publication as a Working Draft does not imply endorsement by the
+    <abbr title="World Wide Web Consortium">
+     W3C
+    </abbr>
+    Membership. This is a draft document and may be updated, replaced or obsoleted by other
+            documents at any time. It is inappropriate to cite this document as other than work in
+            progress.
+   </p>
+   <p>
+    This document was produced by a group operating under the
+    <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/" id="sotd_patent" property="w3p:patentRules">
+     5 February 2004
+     <abbr title="World Wide Web Consortium">
+      W3C
+     </abbr>
+     Patent
+            Policy
+    </a>
+    .
+    <abbr title="World Wide Web Consortium">
+     W3C
+    </abbr>
+    maintains a
+    <a href="http://www.w3.org/2004/01/pp-impl/45211/status" rel="disclosure">
+     public list of any patent
+              disclosures
+    </a>
+    made in connection with the deliverables of the group; that page also includes
+            instructions for disclosing a patent. An individual who has actual knowledge of a patent
+            which the individual believes contains
+    <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">
+     Essential
+            Claim(s)
+    </a>
+    must disclose the information in accordance with
+    <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">
+     section
+            6 of the
+     <abbr title="World Wide Web Consortium">
+      W3C
+     </abbr>
+     Patent Policy
+    </a>
+    .
+   </p>
+   <p>
+    This document is governed by the
+    <a href="http://www.w3.org/2014/Process-20140801/" id="w3c_process_revision">
+     1 August 2014
+     <abbr title="World Wide Web Consortium">
+      W3C
+     </abbr>
+     Process Document
+    </a>
+    .
+   </p>
+  </section>
+  <section id="toc">
+   <h2 class="introductory" id="h-toc" resource="#h-toc">
+    <span property="xhv:role" resource="xhv:heading">
+     Table of Contents
+    </span>
+   </h2>
+   <ul class="toc" id="respecContents" role="directory">
+    <li class="tocline">
+     <a class="tocxref" href="#introduction">
+      <span class="secno">
+       1.
+      </span>
+      Introduction
+     </a>
+     <ul class="toc">
+      <li class="tocline">
+       <a class="tocxref" href="#examples">
+        <span class="secno">
+         1.1
+        </span>
+        Examples
+       </a>
+      </li>
+      <li class="tocline">
+       <a class="tocxref" href="#conformance">
+        <span class="secno">
+         1.2
+        </span>
+        Conformance
+       </a>
+      </li>
+     </ul>
+    </li>
+    <li class="tocline">
+     <a class="tocxref" href="#high-resolution-time">
+      <span class="secno">
+       2.
+      </span>
+      High Resolution Time
+     </a>
+     <ul class="toc">
+      <li class="tocline">
+       <a class="tocxref" href="#high-resolution-introduction">
+        <span class="secno">
+         2.1
+        </span>
+        Introduction
+       </a>
+      </li>
+      <li class="tocline">
+       <a class="tocxref" href="#time-origin-1">
+        <span class="secno">
+         2.2
+        </span>
+        Time Origin
+       </a>
+      </li>
+      <li class="tocline">
+       <a class="tocxref" href="#the-performance-interface">
+        <span class="secno">
+         2.3
+        </span>
+        The
+        <code>
+         Performance
+        </code>
+        interface
+       </a>
+       <ul class="toc">
+        <li class="tocline">
+         <a class="tocxref" href="#methods">
+          <span class="secno">
+           2.3.1
+          </span>
+          Methods
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="tocline">
+       <a class="tocxref" href="#monotonic-clock">
+        <span class="secno">
+         2.4
+        </span>
+        Monotonic Clock
+       </a>
+      </li>
+      <li class="tocline">
+       <a class="tocxref" href="#privacy-security">
+        <span class="secno">
+         2.5
+        </span>
+        Privacy and Security
+       </a>
+      </li>
+     </ul>
+    </li>
+    <li class="tocline">
+     <a class="tocxref" href="#acknowledgments">
+      <span class="secno">
+       A.
+      </span>
+      Acknowledgments
+     </a>
+    </li>
+    <li class="tocline">
+     <a class="tocxref" href="#references">
+      <span class="secno">
+       B.
+      </span>
+      References
+     </a>
+     <ul class="toc">
+      <li class="tocline">
+       <a class="tocxref" href="#normative-references">
+        <span class="secno">
+         B.1
+        </span>
+        Normative references
+       </a>
+      </li>
+      <li class="tocline">
+       <a class="tocxref" href="#informative-references">
+        <span class="secno">
+         B.2
+        </span>
+        Informative references
+       </a>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </section>
+  <section class="informative" id="introduction" property="bibo:hasPart" resource="#introduction" typeof="bibo:Chapter">
+   <!--OddPage-->
+   <h2 id="h-introduction" resource="#h-introduction">
+    <span property="xhv:role" resource="xhv:heading">
+     <span class="secno">
+      1.
+     </span>
+     Introduction
+    </span>
+   </h2>
+   <p>
+    <em>
+     This section is non-normative.
+    </em>
+   </p>
+   <p>
+    The ECMAScript Language specification [
+    <cite>
+     <a class="bibref" href="#bib-ECMA-262">
+      ECMA-262
+     </a>
+    </cite>
+    ] defines the Date object as a time value representing time in milliseconds since 01 January, 1970 UTC. For most purposes, this definition of time is sufficient as
+these values represent time to millisecond precision for any instant that is within approximately 285,616 years from
+01 January, 1970 UTC. The
+    <a href="http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp">
+     DOMTimeStamp
+    </a>
+    is defined similarly [
+    <cite>
+     <a class="bibref" href="#bib-WebIDL">
+      WebIDL
+     </a>
+    </cite>
+    ].
+   </p>
+   <p>
+    In practice, these definitions of time are subject to both clock skew and adjustment of the system clock. The value of time may not always be monotonically increasing and subsequent values may either decrease
+or remain the same.
+   </p>
+   <p>
+    For example, the following script may log a positive number, negative number, or zero.
+   </p>
+   <div class="example">
+    <div class="example-title">
+     <span>
+      Example 1
+     </span>
+    </div>
+    <pre class="example highlight prettyprint prettyprinted" style=""><span class="kwd">var</span><span class="pln"> mark_start </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">.</span><span class="pln">now</span><span class="pun">();</span><span class="pln">
+doTask</span><span class="pun">();</span><span class="pln"> </span><span class="com">// Some task</span><span class="pln">
+</span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">window</span><span class="pun">.</span><span class="pln">console</span><span class="pun">)</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'Duration of task: '</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="pun">(</span><span class="typ">Date</span><span class="pun">.</span><span class="pln">now</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> mark_start</span><span class="pun">));</span></pre>
+   </div>
+   <p>
+    For certain tasks this definition of time may not be sufficient as it does not allow for sub-millisecond resolution and is subject to system clock skew. For example,
+   </p>
+   <ul>
+    <li>
+     When attempting to accurately measure the elapsed time of navigating to a Document, fetching of resources or execution of script, a monotonically increasing clock
+		with sub-millisecond resolution is desired.
+    </li>
+    <li>
+     When calculating the animation state from script, developers will need to accurately know the amount of time that has elapsed in the animation in order to properly update the
+		next scene of the animation.
+    </li>
+    <li>
+     When calculating the frame rate of a script based animation, developers will need sub-millisecond resolution in order to determine if an animation is drawing at 60 FPS.
+		Without sub-millisecond resolution, a developer can only determine if an animation is drawing at 58.8 FPS or 62.5 FPS.
+    </li>
+    <li>
+     In order to cue audio to a specific point in an animation or ensure that the audio is synchronized with the animation,
+		developers will need to accurately know the amount of time elapsed in the animation and audio.
+    </li>
+   </ul>
+   <p>
+    This specification does not propose changing the behavior of
+    <code>
+     Date.now()
+    </code>
+    [
+    <cite>
+     <a class="bibref" href="#bib-ECMA-262">
+      ECMA-262
+     </a>
+    </cite>
+    ] as it is genuinely useful in determining the current value of the calendar time and has a long history of
+usage. The
+    <a class="internalDFN" href="#dom-domhighrestimestamp">
+     <code>
+      DOMHighResTimeStamp
+     </code>
+    </a>
+    type and the
+    <a class="internalDFN" href="#dom-performance-now">
+     <code>
+      now
+     </code>
+    </a>
+    method of the
+    <a class="idlType" href="#idl-def-Performance">
+     <code>
+      Performance
+     </code>
+    </a>
+    interface resolve the issues summarized in this section by providing a monotonically increasing time value in sub-millisecond resolution.
+   </p>
+   <section class="informative" id="examples" property="bibo:hasPart" resource="#examples" typeof="bibo:Chapter">
+    <h3 id="h-examples" resource="#h-examples">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       1.1
+      </span>
+      Examples
+     </span>
+    </h3>
+    <p>
+     <em>
+      This section is non-normative.
+     </em>
+    </p>
+    <p>
+     A developer may wish to construct a timeline of their entire application, including events from
+     <a href="http://www.w3.org/TR/workers/#worker">
+      dedicated
+     </a>
+     or
+     <a href="http://www.w3.org/TR/workers/#sharedworker">
+      shared workers
+     </a>
+     , which have a different
+     <a class="internalDFN" href="#time-origin">
+      time origin
+     </a>
+     . To display such events on the same timeline, the application can translate the
+     <a class="internalDFN" href="#dom-domhighrestimestamp" title="DOMHighResTimeStamp">
+      <code>
+       <code>
+        DOMHighResTimeStamps
+       </code>
+      </code>
+     </a>
+     from the worker with the
+     <a class="internalDFN" href="#dom-performance-translateTime">
+      <code>
+       translateTime
+      </code>
+     </a>
+     method.
+    </p>
+    <div class="example">
+     <div class="example-title">
+      <span>
+       Example 2
+      </span>
+     </div>
+     <pre class="example highlight prettyprint prettyprinted" style=""><span class="com">// ---- worker.js -----------------------------</span><span class="pln">
+</span><span class="com">// Shared worker script</span><span class="pln">
+onconnect </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> port </span><span class="pun">=</span><span class="pln"> e</span><span class="pun">.</span><span class="pln">ports</span><span class="pun">[</span><span class="lit">0</span><span class="pun">];</span><span class="pln">
+  port</span><span class="pun">.</span><span class="pln">onmessage </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="com">// Time execution in worker</span><span class="pln">
+    </span><span class="kwd">var</span><span class="pln"> task_start </span><span class="pun">=</span><span class="pln"> performance</span><span class="pun">.</span><span class="pln">now</span><span class="pun">();</span><span class="pln">
+    result </span><span class="pun">=</span><span class="pln"> runSomeWorkerTask</span><span class="pun">();</span><span class="pln">
+    </span><span class="kwd">var</span><span class="pln"> task_end </span><span class="pun">=</span><span class="pln"> performance</span><span class="pun">.</span><span class="pln">now</span><span class="pun">();</span><span class="pln">
+
+    port</span><span class="pun">.</span><span class="pln">postMessage</span><span class="pun">({</span><span class="pln">
+       </span><span class="str">'task'</span><span class="pun">:</span><span class="pln"> </span><span class="str">'Some worker task'</span><span class="pun">,</span><span class="pln">
+       </span><span class="str">'start_time'</span><span class="pun">:</span><span class="pln"> task_start</span><span class="pun">,</span><span class="pln">
+       </span><span class="str">'end_time'</span><span class="pun">:</span><span class="pln"> task_end</span><span class="pun">,</span><span class="pln">
+       </span><span class="str">'result'</span><span class="pun">:</span><span class="pln"> result
+    </span><span class="pun">});</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="com">// ---- application.js ------------------------</span><span class="pln">
+</span><span class="com">// Timing tasks in the document</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> task_start </span><span class="pun">=</span><span class="pln"> performance</span><span class="pun">.</span><span class="pln">now</span><span class="pun">();</span><span class="pln">
+result </span><span class="pun">=</span><span class="pln"> runSomeWorkerTask</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> task_end </span><span class="pun">=</span><span class="pln"> performance</span><span class="pun">.</span><span class="pln">now</span><span class="pun">();</span><span class="pln">
+
+plotEventOnTimeline</span><span class="pun">({</span><span class="pln">
+  </span><span class="str">'task'</span><span class="pun">:</span><span class="pln"> </span><span class="str">'Some document task'</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">'start_time'</span><span class="pun">:</span><span class="pln"> task_start</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">'end_time'</span><span class="pun">:</span><span class="pln"> task_end</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">'result'</span><span class="pun">:</span><span class="pln"> result
+</span><span class="pun">});</span><span class="pln">
+
+</span><span class="com">// Translating worker timestamps into document's time origin</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> worker </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">SharedWorker</span><span class="pun">(</span><span class="str">'worker.js'</span><span class="pun">);</span><span class="pln">
+worker</span><span class="pun">.</span><span class="pln">port</span><span class="pun">.</span><span class="pln">onmessage </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">event</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+  </span><span class="kwd">var</span><span class="pln"> msg </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">data</span><span class="pun">;</span><span class="pln">
+
+  </span><span class="com">// translate timestamps into document's time origin</span><span class="pln">
+  msg</span><span class="pun">.</span><span class="pln">start_time </span><span class="pun">=</span><span class="pln"> performance</span><span class="pun">.</span><span class="pln">translateTime</span><span class="pun">(</span><span class="pln">msg</span><span class="pun">.</span><span class="pln">start_time</span><span class="pun">,</span><span class="pln"> worker</span><span class="pun">);</span><span class="pln">
+  msg</span><span class="pun">.</span><span class="pln">end_time </span><span class="pun">=</span><span class="pln"> performance</span><span class="pun">.</span><span class="pln">translateTime</span><span class="pun">(</span><span class="pln">msg</span><span class="pun">.</span><span class="pln">end_time</span><span class="pun">,</span><span class="pln"> worker</span><span class="pun">);</span><span class="pln">
+
+  </span><span class="com">// plot the results on document's timeline</span><span class="pln">
+  plotEventOnTimeline</span><span class="pun">(</span><span class="pln">msg</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span></pre>
+    </div>
+   </section>
+   <section id="conformance" property="bibo:hasPart" resource="#conformance" typeof="bibo:Chapter">
+    <h3 id="h-conformance" resource="#h-conformance">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       1.2
+      </span>
+      Conformance
+     </span>
+    </h3>
+    <p>
+     As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
+  and notes in this specification are non-normative. Everything else in this specification is
+  normative.
+    </p>
+    <p id="respecRFC2119">
+     The key words
+     <em class="rfc2119" title="MUST">
+      MUST
+     </em>
+     and
+     <em class="rfc2119" title="SHOULD">
+      SHOULD
+     </em>
+     are
+  to be interpreted as described in [
+     <cite>
+      <a class="bibref" href="#bib-RFC2119">
+       RFC2119
+      </a>
+     </cite>
+     ].
+    </p>
+    <p>
+     Some conformance requirements are phrased as requirements on attributes,
+methods or objects. Such requirements are to be interpreted as requirements
+on user agents.
+    </p>
+    <p>
+     The IDL fragments in this specification must be interpreted as
+    required for conforming IDL fragments, as described in the Web IDL
+    specification. [
+     <cite>
+      <a class="bibref" href="#bib-WebIDL">
+       WebIDL
+      </a>
+     </cite>
+     ]
+    </p>
+   </section>
+  </section>
+  <section id="high-resolution-time" property="bibo:hasPart" resource="#high-resolution-time" typeof="bibo:Chapter">
+   <!--OddPage-->
+   <h2 id="h-high-resolution-time" resource="#h-high-resolution-time">
+    <span property="xhv:role" resource="xhv:heading">
+     <span class="secno">
+      2.
+     </span>
+     High Resolution Time
+    </span>
+   </h2>
+   <section class="informative" id="high-resolution-introduction" property="bibo:hasPart" resource="#high-resolution-introduction" typeof="bibo:Chapter">
+    <h3 id="h-high-resolution-introduction" resource="#h-high-resolution-introduction">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       2.1
+      </span>
+      Introduction
+     </span>
+    </h3>
+    <p>
+     <em>
+      This section is non-normative.
+     </em>
+    </p>
+    <p>
+     This specification defines an interface that provides the current time
+	in sub-millisecond resolution and such that it is not subject to system clock skew or adjustments.
+    </p>
+   </section>
+   <section id="time-origin-1" property="bibo:hasPart" resource="#time-origin-1" typeof="bibo:Chapter">
+    <h3 id="h-time-origin-1" resource="#h-time-origin-1">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       2.2
+      </span>
+      Time Origin
+     </span>
+    </h3>
+    <p>
+     The
+     <i>
+      <dfn id="time-origin">
+       time origin
+      </dfn>
+     </i>
+     is the time value from which time is measured.
+    </p>
+    <ul>
+     <li>
+      If the
+      <a href="http://www.w3.org/TR/html5/webappapis.html#global-object">
+       global object
+      </a>
+      is a
+      <code>
+       Window
+      </code>
+      object, the
+      <i>
+       time origin
+      </i>
+      must be equal to the time of starting the
+      <a href="http://www.w3.org/TR/html5/browsers.html#navigate">
+       navigation
+      </a>
+      responsible for loading the current document, unless a confirmation dialog is displayed during the
+      <a href="http://www.w3.org/TR/html5/browsers.html#prompt-to-unload-a-document">
+       prompt to unload
+      </a>
+      algorithm, in which case the time of the user confirming the navigation must be used instead. If there is no previous document, the time origin must be equal to the time when the
+      <a href="https://html.spec.whatwg.org/multipage/browsers.html#creating-a-new-browsing-context">
+       browsing context is first created
+      </a>
+      . [
+      <cite>
+       <a class="bibref" href="#bib-HTML5">
+        HTML5
+       </a>
+      </cite>
+      ]
+     </li>
+     <li>
+      If the
+      <a href="http://www.w3.org/TR/html5/webappapis.html#global-object">
+       global object
+      </a>
+      is a
+      <a href="https://w3c.github.io/workers/#the-workerglobalscope-common-interface">
+       <code>
+        WorkerGlobalScope
+       </code>
+      </a>
+      object, the
+      <i>
+       time origin
+      </i>
+      must be equal to the
+      <a href="https://w3c.github.io/workers/#official-moment-of-creation">
+       official moment of creation
+      </a>
+      of the worker. [
+      <cite>
+       <a class="bibref" href="#bib-WORKERS">
+        WORKERS
+       </a>
+      </cite>
+      ]
+     </li>
+     <li>
+      Otherwise, the
+      <i>
+       time origin
+      </i>
+      is undefined.
+     </li>
+    </ul>
+    <h3 id="sec-DOMHighResTimeStamp">
+     <span class="secno">
+      4.3
+     </span>
+     The
+     <code>
+      DOMHighResTimeStamp
+     </code>
+     Type
+    </h3>
+    <p>
+     The
+     <a class="internalDFN" href="#dom-domhighrestimestamp">
+      <code>
+       <code>
+        DOMHighResTimeStamp
+       </code>
+      </code>
+     </a>
+     type is used to store a time value measured relative from the
+     <i>
+      <a class="internalDFN" href="#time-origin">
+       time origin
+      </a>
+     </i>
+     or a time value that represents a duration
+	between two
+     <a class="internalDFN" href="#dom-domhighrestimestamp" title="DOMHighResTimeStamp">
+      <code>
+       DOMHighResTimeStamps
+      </code>
+     </a>
+     .
+    </p>
+    <pre class="idl"><span class="idlTypedef" data-idl="" data-title="DOMHighResTimeStamp" id="idl-def-domhighrestimestamp">typedef <span class="idlTypedefType">double</span> <span class="idlTypedefID"><a class="internalDFN" href="#dom-domhighrestimestamp" title="DOMHighResTimeStamp"><code>DOMHighResTimeStamp</code></a></span>;</span></pre>
+    <p>
+     A
+     <dfn data-dfn-for="" data-idl="" id="dom-domhighrestimestamp">
+      <code>
+       DOMHighResTimeStamp
+      </code>
+     </dfn>
+     <em class="rfc2119" title="SHOULD">
+      SHOULD
+     </em>
+     represent a time in milliseconds accurate to a microsecond.
+    </p>
+    <div class="note">
+     <div aria-level="4" class="note-title" id="h-note1" role="heading">
+      <span>
+       Note
+      </span>
+     </div>
+     <p class="">
+      If the User Agent is unable to provide a time value accurate to a microsecond due to hardware or software constraints, the User Agent
+can represent a
+      <a class="internalDFN" href="#dom-domhighrestimestamp">
+       <code>
+        DOMHighResTimeStamp
+       </code>
+      </a>
+      as a time in milliseconds accurate to a millisecond.
+     </p>
+    </div>
+   </section>
+   <section id="the-performance-interface" property="bibo:hasPart" resource="#the-performance-interface" typeof="bibo:Chapter">
+    <h3 id="h-the-performance-interface" resource="#h-the-performance-interface">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       2.3
+      </span>
+      The
+      <code>
+       Performance
+      </code>
+      interface
+     </span>
+    </h3>
+    <pre class="idl"><span class="idlInterface" id="idl-def-Performance">[<span class="extAttr">Exposed=(Window,Worker)</span>]
+interface <span class="idlInterfaceID">Performance</span> : <span class="idlSuperclass">EventTarget</span> {
+<span class="idlMethod">    <span class="idlMethType"><a class="internalDFN" href="#dom-domhighrestimestamp"><code>DOMHighResTimeStamp</code></a></span> <span class="idlMethName"><a href="#widl-Performance-now-DOMHighResTimeStamp">now</a></span> ();</span>
+<span class="idlMethod">    <span class="idlMethType"><a class="internalDFN" href="#dom-domhighrestimestamp"><code>DOMHighResTimeStamp</code></a></span> <span class="idlMethName"><a href="#widl-Performance-translateTime-DOMHighResTimeStamp-DOMHighResTimeStamp-time-Window-Worker-SharedWorker-ServiceWorker-timeSource">translateTime</a></span> (<span class="idlParam"><span class="idlParamType"><a class="internalDFN" href="#dom-domhighrestimestamp"><code>DOMHighResTimeStamp</code></a></span> <span class="idlParamName">time</span></span>, <span class="idlParam"><span class="idlParamType">(Window or Worker or SharedWorker or ServiceWorker)</span> <span class="idlParamName">timeSource</span></span>);</span>
+};</span></pre>
+    <section id="methods" property="bibo:hasPart" resource="#methods" typeof="bibo:Chapter">
+     <h4 id="h-methods" resource="#h-methods">
+      <span property="xhv:role" resource="xhv:heading">
+       <span class="secno">
+        2.3.1
+       </span>
+       Methods
+      </span>
+     </h4>
+     <dl class="methods">
+      <dt id="widl-Performance-now-DOMHighResTimeStamp">
+       <code>
+        now
+       </code>
+      </dt>
+      <dd>
+       <p>
+        The
+        <dfn id="dom-performance-now">
+         <code>
+          now
+         </code>
+        </dfn>
+        method
+        <em class="rfc2119" title="MUST">
+         MUST
+        </em>
+        return a
+        <a class="internalDFN" href="#dom-domhighrestimestamp">
+         <code>
+          DOMHighResTimeStamp
+         </code>
+        </a>
+        representing the time in milliseconds
+	from the
+        <a class="internalDFN" href="#time-origin">
+         time origin
+        </a>
+        to the occurrence of the call to the
+        <a class="internalDFN" href="#dom-performance-now">
+         <code>
+          now
+         </code>
+        </a>
+        method.
+       </p>
+       <div>
+        <em>
+         No parameters.
+        </em>
+       </div>
+       <div>
+        <em>
+         Return type:
+        </em>
+        <code>
+         <a class="internalDFN" href="#dom-domhighrestimestamp">
+          <code>
+           DOMHighResTimeStamp
+          </code>
+         </a>
+        </code>
+       </div>
+      </dd>
+      <dt id="widl-Performance-translateTime-DOMHighResTimeStamp-DOMHighResTimeStamp-time-Window-Worker-SharedWorker-ServiceWorker-timeSource">
+       <code>
+        translateTime
+       </code>
+      </dt>
+      <dd>
+       <p>
+        The
+        <dfn id="dom-performance-translateTime">
+         <code>
+          translateTime
+         </code>
+        </dfn>
+        method
+        <em class="rfc2119" title="MUST">
+         MUST
+        </em>
+        return a
+        <a class="internalDFN" href="#dom-domhighrestimestamp">
+         <code>
+          DOMHighResTimeStamp
+         </code>
+        </a>
+        that is the result of adding the provided
+        <code>
+         time
+        </code>
+        , and the difference between the
+        <a class="internalDFN" href="#time-origin">
+         time origin
+        </a>
+        of the provided
+        <code>
+         timeSource
+        </code>
+        and the
+        <a class="internalDFN" href="#time-origin">
+         time origin
+        </a>
+        of the global of the performance object that is the
+        <code>
+         this
+        </code>
+        value for the
+        <a class="internalDFN" href="#dom-performance-translateTime">
+         <code>
+          translateTime
+         </code>
+        </a>
+        call.
+       </p>
+       <div class="note">
+        <div aria-level="5" class="note-title" id="h-note2" role="heading">
+         <span>
+          Note
+         </span>
+        </div>
+        <p class="">
+         To translate the timestamp (
+         <code>
+          time
+         </code>
+         ), the equation is:
+         <code>
+          time + ((time origin of timeSource) - (time origin for the
+          <i>
+           translateTime
+          </i>
+          call))
+         </code>
+         .
+        </p>
+       </div>
+       <table class="parameters">
+        <tbody>
+         <tr>
+          <th>
+           Parameter
+          </th>
+          <th>
+           Type
+          </th>
+          <th>
+           Nullable
+          </th>
+          <th>
+           Optional
+          </th>
+          <th>
+           Description
+          </th>
+         </tr>
+         <tr>
+          <td class="prmName">
+           time
+          </td>
+          <td class="prmType">
+           <code>
+            <a class="internalDFN" href="#dom-domhighrestimestamp">
+             <code>
+              DOMHighResTimeStamp
+             </code>
+            </a>
+           </code>
+          </td>
+          <td class="prmNullFalse">
+           <span aria-label="False" role="img">
+            ✘
+           </span>
+          </td>
+          <td class="prmOptFalse">
+           <span aria-label="False" role="img">
+            ✘
+           </span>
+          </td>
+          <td class="prmDesc">
+          </td>
+         </tr>
+         <tr>
+          <td class="prmName">
+           timeSource
+          </td>
+          <td class="prmType">
+           <code>
+            (Window or Worker or SharedWorker or ServiceWorker)
+           </code>
+          </td>
+          <td class="prmNullFalse">
+           <span aria-label="False" role="img">
+            ✘
+           </span>
+          </td>
+          <td class="prmOptFalse">
+           <span aria-label="False" role="img">
+            ✘
+           </span>
+          </td>
+          <td class="prmDesc">
+          </td>
+         </tr>
+        </tbody>
+       </table>
+       <div>
+        <em>
+         Return type:
+        </em>
+        <code>
+         <a class="internalDFN" href="#dom-domhighrestimestamp">
+          <code>
+           DOMHighResTimeStamp
+          </code>
+         </a>
+        </code>
+       </div>
+      </dd>
+     </dl>
+    </section>
+   </section>
+   <section id="monotonic-clock" property="bibo:hasPart" resource="#monotonic-clock" typeof="bibo:Chapter">
+    <h3 id="h-monotonic-clock" resource="#h-monotonic-clock">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       2.4
+      </span>
+      Monotonic Clock
+     </span>
+    </h3>
+    <p>
+     The time values returned when calling the
+     <a class="internalDFN" href="#dom-performance-now">
+      <code>
+       now
+      </code>
+     </a>
+     method
+     <em class="rfc2119" title="MUST">
+      MUST
+     </em>
+     be monotonically increasing and not subject to system clock
+adjustments or system clock skew. The difference between any two chronologically recorded time values returned from the
+     <a class="internalDFN" href="#dom-performance-now">
+      <code>
+       now
+      </code>
+     </a>
+     method
+     <em class="rfc2119" title="MUST">
+      MUST
+     </em>
+     never be negative.
+    </p>
+   </section>
+   <section id="privacy-security" property="bibo:hasPart" resource="#privacy-security" typeof="bibo:Chapter">
+    <h3 id="h-privacy-security" resource="#h-privacy-security">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       2.5
+      </span>
+      Privacy and Security
+     </span>
+    </h3>
+    <p>
+     Statistical fingerprinting is a privacy concern where a malicious web site may determine whether a user has visited a
+third-party web site by measuring the timing of cache hits and misses of resources in the third-party web site.
+Though the
+     <a class="internalDFN" href="#dom-performance-now">
+      <code>
+       now
+      </code>
+     </a>
+     method of the
+     <a class="idlType" href="#idl-def-Performance">
+      <code>
+       Performance
+      </code>
+     </a>
+     interface
+returns time data to a greater accuracy than before, it does not make this privacy concern significantly worse than it was already.
+    </p>
+   </section>
+  </section>
+  <section class="appendix" id="acknowledgments" property="bibo:hasPart" resource="#acknowledgments" typeof="bibo:Chapter">
+   <!--OddPage-->
+   <h2 id="h-acknowledgments" resource="#h-acknowledgments">
+    <span property="xhv:role" resource="xhv:heading">
+     <span class="secno">
+      A.
+     </span>
+     Acknowledgments
+    </span>
+   </h2>
+   <p>
+    I would like to sincerely thank Karen Anderson, Nat Duca, Tony Gentilcore, Arvind Jain, Jason Weber, and Boris Zbarsky to acknowledge their contributions to this work.
+   </p>
+  </section>
+  <section class="appendix" id="references" property="bibo:hasPart" resource="#references" typeof="bibo:Chapter">
+   <!--OddPage-->
+   <h2 id="h-references" resource="#h-references">
+    <span property="xhv:role" resource="xhv:heading">
+     <span class="secno">
+      B.
+     </span>
+     References
+    </span>
+   </h2>
+   <section id="normative-references" property="bibo:hasPart" resource="#normative-references" typeof="bibo:Chapter">
+    <h3 id="h-normative-references" resource="#h-normative-references">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       B.1
+      </span>
+      Normative references
+     </span>
+    </h3>
+    <dl class="bibliography" resource="">
+     <dt id="bib-HTML5">
+      [HTML5]
+     </dt>
+     <dd>
+      Ian Hickson; Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer.
+      <a href="http://www.w3.org/TR/html5/" property="dc:requires">
+       <cite>
+        HTML5
+       </cite>
+      </a>
+      . 28 October 2014. W3C Recommendation. URL:
+      <a href="http://www.w3.org/TR/html5/" property="dc:requires">
+       http://www.w3.org/TR/html5/
+      </a>
+     </dd>
+     <dt id="bib-RFC2119">
+      [RFC2119]
+     </dt>
+     <dd>
+      S. Bradner.
+      <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires">
+       <cite>
+        Key words for use in RFCs to Indicate Requirement Levels
+       </cite>
+      </a>
+      . March 1997. Best Current Practice. URL:
+      <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires">
+       https://tools.ietf.org/html/rfc2119
+      </a>
+     </dd>
+     <dt id="bib-WORKERS">
+      [WORKERS]
+     </dt>
+     <dd>
+      Ian Hickson.
+      <a href="http://www.w3.org/TR/workers/" property="dc:requires">
+       <cite>
+        Web Workers
+       </cite>
+      </a>
+      . 1 May 2012. W3C Candidate Recommendation. URL:
+      <a href="http://www.w3.org/TR/workers/" property="dc:requires">
+       http://www.w3.org/TR/workers/
+      </a>
+     </dd>
+     <dt id="bib-WebIDL">
+      [WebIDL]
+     </dt>
+     <dd>
+      Cameron McCormack.
+      <a href="http://www.w3.org/TR/WebIDL/" property="dc:requires">
+       <cite>
+        Web IDL
+       </cite>
+      </a>
+      . 19 April 2012. W3C Candidate Recommendation. URL:
+      <a href="http://www.w3.org/TR/WebIDL/" property="dc:requires">
+       http://www.w3.org/TR/WebIDL/
+      </a>
+     </dd>
+    </dl>
+   </section>
+   <section id="informative-references" property="bibo:hasPart" resource="#informative-references" typeof="bibo:Chapter">
+    <h3 id="h-informative-references" resource="#h-informative-references">
+     <span property="xhv:role" resource="xhv:heading">
+      <span class="secno">
+       B.2
+      </span>
+      Informative references
+     </span>
+    </h3>
+    <dl class="bibliography" resource="">
+     <dt id="bib-ECMA-262">
+      [ECMA-262]
+     </dt>
+     <dd>
+      Allen Wirfs-Brock.
+      <a href="http://www.ecma-international.org/ecma-262/6.0/" property="dc:references">
+       <cite>
+        ECMA-262 6th Edition, The ECMAScript 2015 Language Specification
+       </cite>
+      </a>
+      . June 2015. Standard. URL:
+      <a href="http://www.ecma-international.org/ecma-262/6.0/" property="dc:references">
+       http://www.ecma-international.org/ecma-262/6.0/
+      </a>
+     </dd>
+     <dt id="bib-HR-TIME">
+      [HR-TIME]
+     </dt>
+     <dd>
+      Jatinder Mann.
+      <a href="http://www.w3.org/TR/hr-time/" property="dc:references">
+       <cite>
+        High Resolution Time
+       </cite>
+      </a>
+      . 17 December 2012. W3C Recommendation. URL:
+      <a href="http://www.w3.org/TR/hr-time/" property="dc:references">
+       http://www.w3.org/TR/hr-time/
+      </a>
+     </dd>
+    </dl>
+   </section>
+  </section>
+ </body>
+</html>

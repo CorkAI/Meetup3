@@ -49,10 +49,16 @@ NOTE: From this point on, the instructions are specific for Meetup3!
  Our AWS machine has multiple deep-learning environments installed (conda environments).  We need to launch one so that the libraries we need (e.g. tensorflow) are ready for use:
  - Type ```source activate tensorflow_p27```
 
- ** Install SkLearn**
+ **Install SkLearn**
  The "word2vec" example requires the SkLearn module be installed. To do this:
  - Type ```pip install sklearn```
 
-#### 3: Execute word2vec.py
-You can now execute word2vec.py to calculate the word embeddings
+#### 3: Execute doccluster.py
+Executing doccluster.py will cluster the documents in the "Data" directory
+and create the "docclust.png" image with the dendrogram showing the similarity
+between docments.
+- Type ```python doccluster.py```
+
+#### 4: Execute word2vec.py
+You can now execute word2vec.py to calculate the word embeddings.
 - Type ```python word2vec.py```
