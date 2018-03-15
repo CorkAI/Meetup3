@@ -95,3 +95,14 @@ You can now execute word2vec.py to calculate the word embeddings.
 As well as reporting semantically similar words, the program creates a plot 'tsne.png' in the "output_images" folder. This visually shows semantic similarities between terms. Use the instuctions from above to download and view the image.
 
 The following blog post provides a short description of this program: https://nickgrattandatascience.wordpress.com/2018/03/15/doc2vec-example/
+
+#### 5: Ending your AWS session
+When you are finished working on AWS you need to stop (or terminate) your AWS instance to discontinue usage charges.
+This is **not** achieved by just logging out in the terminal!!
+
+**Stopping/Terminating your instance.**
+- From EC2 dashboard->instances
+ - You should see your launched instance listed (and selected with blue checkbox)
+ - In the "Actions" drop-down menu choose "Instance State" and either "stop" or "terminate"
+   - "stop" will end your session, but keep your instance and data safe for next time you want to use it. The fee for maintaining the data volume only will be around $5.50 per month.
+   - "terminate" will end your session and will **not** retain your data or your instance state. There will be no further charge on your account if you choose terminate
