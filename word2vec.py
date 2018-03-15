@@ -14,6 +14,8 @@
 # ==============================================================================
 """Basic word2vec example."""
 
+# From: https://github.com/petewarden/tensorflow_makefile/blob/master/tensorflow/examples/tutorials/word2vec/word2vec_basic.py
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function

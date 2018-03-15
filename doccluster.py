@@ -38,7 +38,7 @@ def getdocumentlist():
 
 def readdocs(doclist):
     """
-    Tokensise the list of documents
+    Tokenise the list of documents
     """
     textdict = {}
     for docfilename in doclist:
@@ -84,7 +84,7 @@ def vectorize(termsdict):
     return (tfs, vocab)
 
 
-def hiearchical_cluster(tfs, doclist):
+def hierarchical_cluster(tfs, doclist):
     """
     Computes hiearchical cluster for the TF/IDF vectorization
     """
@@ -106,6 +106,5 @@ if __name__ == '__main__':
     print(list(texts.keys()))
     tfs, vocab = vectorize(texts)
     print("Vocab size:", len(vocab))
-    # Note: Can pass tfs into this method, which will default to Euclidean distance
-    linkageres = hiearchical_cluster(tfs, list(texts.keys()))
+    linkageres = hierarchical_cluster(tfs, list(texts.keys()))
     print("Created hiearchical cluster plot. See ./output_images/docclust.png")

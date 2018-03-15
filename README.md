@@ -75,6 +75,8 @@ and create the "docclust.png" image with the dendrogram showing the similarity
 between docments.
 - Type ```python doccluster.py```
 
+The following blog post provides a short description of this program: https://nickgrattandatascience.wordpress.com/2018/03/15/document-clustering-example/
+
 The output file 'docclust.png' is written in folder 'output_images'.
  - Use scp to copy the output images to your local machine for inspection:
  	- (linux, mac, cygwin): open a new shell on your local machine and create a fresh empty directory. Then copy the output images to your local system:
@@ -91,3 +93,5 @@ You can now execute word2vec.py to calculate the word embeddings.
 - Type ```python word2vec.py```
 
 As well as reporting semantically similar words, the program creates a plot 'tsne.png' in the "output_images" folder. This visually shows semantic similarities between terms. Use the instuctions from above to download and view the image.
+
+The following blog post provides a short description of this program: https://nickgrattandatascience.wordpress.com/2018/03/15/doc2vec-example/
