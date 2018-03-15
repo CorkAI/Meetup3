@@ -4,6 +4,8 @@
 
 NOTE: If you attended Meetup1 or Meetup2 you will have already completed some of these steps. Ensure you get to see a command prompt $ for your AWS instance.
 
+Slides and other links for this meetup are here: https://nickgrattandatascience.wordpress.com/2018/03/15/cork-ai-meetup-number-3-slide-deck/
+
 #### 1: AMAZON WEB SERVICES (AWS):
 **Sign in to your AWS account**
  - From https://aws.amazon.com/ choose "Sign in to the Console"
